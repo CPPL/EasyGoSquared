@@ -4,6 +4,17 @@ defined('_JEXEC') or die('Restricted access');
 
 require_once __DIR__ . '/easygosquaredhelper.php';
 
+/**
+ *
+ * @author Craig Phillips
+ * @copyright Copyright (C) 2012 Craig Phillips Pty Ltd - All rights reserved.
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE file
+ *
+ * This plugin is based off the CPPL Skeleton Plugin which you can find on GitHub to
+ * build your own Joomla plugins. https://github.com/cppl/Skeleton-Plugin-for-Joomla
+ *
+ */
+
 class plgContentEasyGoSquared extends JPlugin
 {
     protected $trackAdmin;

@@ -2,70 +2,26 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-class plgContentEasyGoSquared extends JPlugin
+/**
+ *
+ * @author Craig Phillips
+ * @copyright Copyright © 2015 Craig Phillips Pty Ltd - All rights reserved.
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE file
+ *
+ */
+class EasyGoSquaredHelper
 {
-    protected $trackAdmin;
-
-    protected $website_GoSqr_Token;
-
-    protected $enabledUserProperties;
-
-    protected $weAreDoingIt;
-
-    /**
-     * @access      public
-     * @param       object $subject The object to observe
-     * @param       array $config An array that holds the plugin configuration
-     */
-    public function __construct(& $subject, $config)
+    public static function buildGoSqrScript($params, $website_GoSqr_Token)
     {
-        parent::__construct($subject, $config);
-
-        // Strictly speaking Joomla doesn't really need you to load the language anymore.
-        $this->loadLanguage();
-
-        // Load some settings
-        $this->website_GoSqr_Token = $this->params->get('gosqr_token', 'GSN-000000-X');
-        $this->trackAdmin = $this->params->get('track_admin', 0);
-        $this->weAreDoingIt = $this->allGood();
-    }
-
-    /**
-     * Based on the events you want to act on (within a your plugins group) you will
-     * need a matching method of a form similar to this one.
-     *
-     * Plugin Events can be found here: http://docs.joomla.org/Plugin/Events
-     *
-     * Please note this is not a real event method, it's just an example of the form they take
-     */
-    function onContentPrepare()
-    {
-        if ($this->weAreDoingIt) {
-            // Build the Script
-            $goScript = $this->buildGoSqrScript();
-
-            // Get current document and inject script
-            $doc = JFactory::getDocument();
-            $doc->addScriptDeclaration($goScript, "text/javascript");
-
-            // Only Do This once!
-            $this->weAreDoingIt = false;
-        }
-
-        return true;
-    }
-
-    private function buildGoSqrScript()
-    {
-        $gs_js = $this->gosqr_script($this->website_GoSqr_Token);
+        $gs_js = self::gosqr_script($website_GoSqr_Token);
 
         // Add any user properties that may be set
-        $gs_js .= $this->getUserPropertiesJS();
+        $gs_js .= self::getUserPropertiesJS($params);
 
         return $gs_js;
     }
 
-    private function gosqr_script($token)
+    private static function gosqr_script($token)
     {
         if ($token) {
             $gs_js = <<<gs_js
@@ -86,18 +42,18 @@ gs_js;
     /**
      * Returns the User Properties setup in the plugin.
      */
-    private function getUserPropertiesJS()
+    private static function getUserPropertiesJS($params)
     {
         $user = JFactory::getUser();
 
-        $properties = explode(',', $this->params->get('user_properties_to_track', ''));
+        $properties = explode(',', $params->get('user_properties_to_track', ''));
 
-        $userPropertiesJS = $this->buildGSUserProp($user, $properties);
+        $userPropertiesJS = self::buildGSUserProp($user, $properties);
 
         return $userPropertiesJS;
     }
 
-    private function buildGSUserProp($user, $properties = array())
+    private static function buildGSUserProp($user, $properties = array())
     {
         $gsUserPropJS = '';
 
@@ -111,7 +67,7 @@ gs_js;
 
                     switch ($propertyKey) {
                         case 'groups':
-                            $keyValue = '\'' . $this->convertGroupIDsToNames($keyValue) . '\'';
+                            $keyValue = '\'' . self::convertGroupIDsToNames($keyValue) . '\'';
                             break;
                         default:
                             $keyValue = is_string($keyValue) && !is_int($keyValue) ? "'$keyValue'" : $keyValue;
@@ -134,12 +90,12 @@ gs_js;
         return $gsUserPropJS;
     }
 
-    private function convertGroupIDsToNames($usersGroups)
+    private static function convertGroupIDsToNames($usersGroups)
     {
         $groupNames = '';
 
         if (is_array($usersGroups)) {
-            $allGroups = $this->getAllGroups();
+            $allGroups = self::getAllGroups();
 
             // Look for matches to build our return string.
             foreach ($allGroups as $group) {
@@ -151,7 +107,6 @@ gs_js;
             if ($groupNames != '' && substr($groupNames, strlen($groupNames) - 1, 1) == ',') {
                 $groupNames = substr($groupNames, 0, strlen($groupNames) - 1);
             }
-
         }
 
         return $groupNames;
@@ -163,12 +118,12 @@ gs_js;
      * @return bool
      * @throws Exception
      */
-    private function allGood()
+    public static function allGood($trackAdmin)
     {
         $app = JFactory::getApplication();
         $backEnd = $app->isAdmin();
 
-        return ($this->trackAdmin && $backEnd) || !$backEnd;
+        return ($trackAdmin && $backEnd) || !$backEnd;
     }
 
     /**
@@ -176,7 +131,7 @@ gs_js;
      *
      * @return mixed
      */
-    private function getAllGroups()
+    private static function getAllGroups()
     {
         $db = JFactory::getDbo();
         $query = $db->getQuery(true)
@@ -186,5 +141,5 @@ gs_js;
         $allGroups = $db->loadObjectList();
         return $allGroups;
     }
-}
 
+}

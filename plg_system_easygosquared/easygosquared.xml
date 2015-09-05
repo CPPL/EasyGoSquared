@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_EASYGOSQUARED</name>
+    <author>Craig Phillips</author>
+    <creationDate>##CREATEDATE##</creationDate>
+    <copyright>Copyright © 2015 Craig Phillips Pty Ltd. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>support@seepeoplesoftware.com</authorEmail>
+    <authorUrl>seepeoplesoftware.com</authorUrl>
+    <version>##VER## (##COMHASH##)</version>
+    <description>PLG_SYSTEM_EASYGOSQUARED_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="easygosquared">easygosquared.php</filename>
+        <folder>language</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="please_note"
+                       label="PLG_SYSTEM_EASYGOSQUARED_SETTINGS_NOTE_LABEL"
+                       description="PLG_SYSTEM_EASYGOSQUARED_SETTINGS_NOTE_DESC" >
+                <field name="hr" type="spacer" hr="true"/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+    <name>plg_content_easygosquared</name>
+    <author>Craig Phillips</author>
+    <creationDate>##CREATEDATE##</creationDate>
+    <copyright>Copyright © 2015 Craig Phillips Pty Ltd. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>support@seepeoplesoftware.com</authorEmail>
+    <authorUrl>seepeoplesoftware.com</authorUrl>
+    <version>##VER## (##COMHASH##)</version>
+    <description>PLG_CONTENT_EASYGOSQUARED_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="easygosquared">easygosquared.php</filename>
+        <folder>language</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="gosqr_token"
+                       type="text"
+                       default=""
+                       placeholder="GSN-000000-X"
+                       label="PLG_CONTENT_EASYGOSQUARED_SITE_TOKEN_LABEL"
+                       description="PLG_CONTENT_EASYGOSQUARED_SITE_TOKEN_DESC"/>
+                <field name="track_admin" type="radio"
+                       default="0"
+                       class="btn-group btn-group-yesno"
+                       description="PLG_CONTENT_EASYGOSQUARED_TRACK_ADMIN_DESC"
+                       label="PLG_CONTENT_EASYGOSQUARED_TRACK_ADMIN_LABEL">
+                    <option value="0">JOFF</option>
+                    <option value="1">JON</option>
+                </field>
+            </fieldset>
+            <fieldset name="advanced">
+                <field name="user_properties_to_track"
+                       type="text"
+                       hint="id,username,email"
+                       label="PLG_CONTENT_EASYGOSQUARED_USER_PROPS_LABEL"
+                       description="PLG_CONTENT_EASYGOSQUARED_USER_PROPS_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

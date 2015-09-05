@@ -1,6 +1,6 @@
 #EasyGoSquared Plugin
 
-A simple Joomla plugin that adds the GoSquared analytics scripts to your apges automatically.
+A simple Joomla plugin that adds the GoSquared analytics scripts to your pages automatically.
 
 ##Basic Usage Steps
   1. Install via the standard Joomla extension manager and enable it.

@@ -7,7 +7,7 @@ require_once __DIR__ . '/easygosquaredhelper.php';
 /**
  *
  * @author Craig Phillips
- * @copyright Copyright (C) 2012 Craig Phillips Pty Ltd - All rights reserved.
+ * @copyright Copyright © 2015 Craig Phillips Pty Ltd - All rights reserved.
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE file
  *
  * This plugin is based off the CPPL Skeleton Plugin which you can find on GitHub to

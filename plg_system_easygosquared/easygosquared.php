@@ -45,12 +45,10 @@ class plgSystemEasyGoSquared extends JPlugin
     }
 
     /**
-     * Based on the events you want to act on (within a your plugins group) you will
-     * need a matching method of a form similar to this one.
+     * In the Admin Joomla we can use a content plugin so before the <head> tag is compiled we can add
+     * the same script into the head if Admin analytics are enabled.
      *
-     * Plugin Events can be found here: http://docs.joomla.org/Plugin/Events
-     *
-     * Please note this is not a real event method, it's just an example of the form they take
+     * @return bool
      */
     function onBeforeCompileHead()
     {
@@ -69,6 +67,12 @@ class plgSystemEasyGoSquared extends JPlugin
         return true;
     }
 
+    /**
+     * A simple check to makes sure the plugins are installed correctly before
+     * using the helper file functions (it also loads the helper file :))
+     *
+     * @return bool
+     */
     private function installedProperly() {
         $path_to_helper = JPATH_PLUGINS . '/content/easygosquared/easygosquaredhelper.php';
 

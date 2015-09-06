@@ -59,8 +59,11 @@ gs_js;
 
         if (!$user->guest && is_array($properties) && count($properties)) {
             /**@PROBLOCK_START@**/
-            $userProfile = JUserHelper::getProfile($user->id);
-            $profile = $userProfile->profile;
+            $j3 = version_compare( JVERSION, '3.0', '<' ) != 1;
+            if ($j3) {
+                $userProfile = JUserHelper::getProfile($user->id);
+                $profile = $userProfile->profile;
+            }
             /**@PROBLOCK_END@**/
 
             foreach ($properties as $propertyKey) {
@@ -77,7 +80,7 @@ gs_js;
 
                     $gsUserPropJS .= "$propertyKey: $keyValue, ";
 
-                }/**@PROBLOCK_START@**/ elseif (isset($profile[$propertyKey])) {
+                }/**@PROBLOCK_START@**/ elseif ($j3 && isset($profile[$propertyKey])) {
                     $keyValue = $profile[$propertyKey];
                     $keyValue = is_string($keyValue) && !is_int($keyValue) ? "'$keyValue'" : $keyValue;
                     $gsUserPropJS .= "$propertyKey: $keyValue, ";

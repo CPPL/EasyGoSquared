@@ -11,6 +11,7 @@
     <description>PLG_CONTENT_EASYGOSQUARED_XML_DESCRIPTION</description>
     <files>
         <filename plugin="easygosquared">easygosquared.php</filename>
+        <filename>easygosquaredhelper.php</filename>
         <folder>language</folder>
     </files>
     <config>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.0" method="upgrade">
+    <name>EasyGoSquared Pro Package</name>
+    <author>Craig Phillips</author>
+    <copyright>Copyright © 2015 Craig Phillips Pty Ltd. All rights reserved.</copyright>
+    <creationDate>##CREATEDATE##</creationDate>
+    <packagename>easygosquared_pro</packagename>
+    <version>##VER## (##COMHASH##)</version>
+    <url>http://seepeoplesoftware.com//</url>
+    <packager>CPPL</packager>
+    <packagerurl>http://craigphillips.biz/</packagerurl>
+    <description><![CDATA[
+    <h3>EasyGoSquared Pro Plugin</h3>\n<p>EasyGoSquared are standard Joomla plugins that add the <a href='http://www.gosquared.com/' target='_blank'>GoSquared Analytics</a> scripts to your websites pages.</p>\n<p style='font-weight:bold'>Usage</p>\n<p>Simply add the GoSquared ID for your website and choose whether to have GoSquared analytics for the Admin as well.</p>\n<p>Don't forget to <a href='/administrator/index.php?option=com_plugins&view=plugins&filter_search=%20-%20EasyGoSquared' title="Open Plugin Manager">enable and configure the plugin in the Plug-in Manager</a>.</p>\n<p style='font-weight:bold'>Credits</p>\n<p>EasyGoSquared plugin for Joomla is an open source product created by <a href='http://craigphillips.biz/?utm_source=EasyGoSquared&utm_medium=OS%2BSoftware&utm_campaign=EasyGoSquared' target='_blank'>CPPL</a> for all your custom software projects.</p>\n<p><a href='http://craigphillips.biz/?utm_source=EasyGoSquared&utm_medium=OS%2BSoftware&utm_campaign=EasyGoSquared%2BPlugin' target='_blank'><img src='http://craigphillips.biz/logo.png' /></a></p>
+    ]]></description>
+    <files>
+        <file type="plugin" id="easygosquared" group="content">plg_content_easygosquared.zip</file>
+        <file type="plugin" id="easygosquared" group="system" >plg_system_easygosquared.zip</file>
+    </files>
+</extension>

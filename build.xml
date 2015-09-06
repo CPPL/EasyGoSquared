@@ -202,7 +202,7 @@
                 <include name="${gitTag}*${ffop}.zip"/>
             </fileset>
             <filelist dir="./" files="pkg_easygosquared_pro.xml"/>
-            <mapper type="glob" from="${gitTag}-*${ffop}.zip" to="*.zip" />
+            <mapper type="glob" from="${gitTag}-*_pro.zip" to="*.zip" />
         </copy>
 
         <!-- Now we can zip up the Pkg. -->

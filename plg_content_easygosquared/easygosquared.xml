@@ -22,6 +22,7 @@
                        placeholder="GSN-000000-X"
                        label="PLG_CONTENT_EASYGOSQUARED_SITE_TOKEN_LABEL"
                        description="PLG_CONTENT_EASYGOSQUARED_SITE_TOKEN_DESC"/>
+<!--@PROBLOCK_START@-->
                 <field name="track_admin" type="radio"
                        default="0"
                        class="btn-group btn-group-yesno"
@@ -30,6 +31,7 @@
                     <option value="0">JOFF</option>
                     <option value="1">JON</option>
                 </field>
+<!--@PROBLOCK_END@-->
             </fieldset>
             <fieldset name="advanced">
                 <field name="user_properties_to_track"

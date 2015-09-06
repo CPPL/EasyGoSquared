@@ -134,6 +134,9 @@
             <property name="freeOrPro" value="${freeOrPro}" override="true"/>
             <property name="ffop" value="${ffop}" override="true"/>
         </phingcall>
+
+        <!-- Remove the leftover buildDir -->
+        <delete dir="${buildDir}"/>
     </target>
 
 
@@ -202,16 +205,20 @@
                 <include name="${gitTag}*${ffop}.zip"/>
             </fileset>
             <filelist dir="./" files="pkg_easygosquared_pro.xml"/>
-            <mapper type="glob" from="${gitTag}-*${ffop}.zip" to="*.zip" />
+            <mapper type="glob" from="${gitTag}-*_pro.zip" to="*.zip" />
         </copy>
 
         <!-- Now we can zip up the Pkg. -->
         <property name="pkgFile" value="${devBuildsDir}/${gitTag}-${pkgDir}.zip"/>
+        <property name="srcDir"  value="${devBuildsDir}/${pkgDir}"/>
         <zip destfile="${pkgFile}">
-            <fileset dir="${devBuildsDir}/${pkgDir}">
+            <fileset dir="${srcDir}">
                 <include name="**"/>
             </fileset>
         </zip>
+
+        <!-- Remove the leftover buildDir -->
+        <delete dir="${srcDir}"/>
     </target>
 
     <!-- ============================================  -->

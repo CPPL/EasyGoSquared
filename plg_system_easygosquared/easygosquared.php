@@ -82,7 +82,13 @@ class plgSystemEasyGoSquared extends JPlugin
 
             if (class_exists('EasyGoSquaredHelper')) {
                 // Looks like the real helper, so lets try and get the content settings
-                $params = new Joomla\Registry\Registry();
+                if ( version_compare( JVERSION, '3.0', '<' ) == 1) {
+                    $params = new JRegistry;
+                }
+                else{
+                    $params = new Joomla\Registry\Registry();
+                }
+
                 $plugin = JPluginHelper::getPlugin('content', 'easygosquared');
 
                 if ($plugin && isset($plugin->params)) {

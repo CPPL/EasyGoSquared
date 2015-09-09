@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <fieldset name="basic"
+              label="COM_EASYGOSQUARED_PREF__TAB_DEFAULT_SETTINGS"
+              description="COM_EASYGOSQUARED_PREF__TAB_DEFAULT_SETTINGS_DESC">
+
+        <field name="start_view"
+               type="list" default="now"
+               label="COM_EASYGOSQUARED_PREF_START_VIEW_LABEL"
+               description="COM_EASYGOSQUARED_PREF_START_VIEW_DESC">
+            <option value="now">COM_EASYGOSQUARED_VIEW_NOW</option>
+            <option value="trends">COM_EASYGOSQUARED_VIEW_TRENDS</option>
+            <option value="ecommerce">COM_EASYGOSQUARED_VIEW_ECOM</option>
+        </field>
+        <field name="api_key"
+               type="text"
+               label="COM_EASYGOSQUARED_PREF_API_KEY_LABEL"
+               description="COM_EASYGOSQUARED_PREF_API_KEY_DESC"/>
+        <field name="token"
+               type="text"
+               label="COM_EASYGOSQUARED_PREF_TOKEN_LABEL"
+               description="COM_EASYGOSQUARED_PREF_TOKEN_DESC"/>
+    </fieldset>
+</config>

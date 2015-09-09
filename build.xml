@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="EasyGoSquared" default="package" basedir="./">
-    <property name="name" value="easygosquared"/>
-    <property name="type" value="plg"/>
-    <property name="subtype" value="_content"/>
-    <property name="extension" value="${type}${subtype}_${name}"/>
-    <property name="repo" value="plg_content_easygosquared"/>
-    <property name="repo2" value="plg_system_easygosquared"/>
+    <property name="name"         value="easygosquared"/>
+    <property name="type"         value="plg"/>
+    <property name="subtype"      value="_content"/>
+    <property name="extension"    value="${type}${subtype}_${name}"/>
+    <property name="repo"         value="plg_content_easygosquared"/>
+    <property name="repo2"        value="plg_system_easygosquared"/>
+    <property name="repo3"        value="com_easygosquared"/>
     <property name="devBuildsDir" value="./_Dev_Builds"/>
 
     <!-- get our start time -->
@@ -56,6 +57,14 @@
     </fileset>
 
     <fileset dir="${repo2}" id="system_repo">
+        <include name="**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name=".gitignore"/>
+        <exclude name=".DS_Store"/>
+        <exclude name="**/.idea/**"/>
+    </fileset>
+
+    <fileset dir="${repo3}" id="component_repo">
         <include name="**"/>
         <exclude name="**/.git/**"/>
         <exclude name=".gitignore"/>
@@ -172,9 +181,32 @@
         <property name="thisbuild" value="${gitTag}-${extension}" override="true"/>
         <property name="buildDir" value="./${devBuildsDir}/${thisbuild}" override="true"/>
 
-        <echo msg="Copying GIT Repo to ${buildDir} from ${repo} for ${freeOrPro}..."/>
+        <echo msg="Copying GIT Repo to ${buildDir} from ${repo2} for ${freeOrPro}..."/>
         <copy todir="${buildDir}">
             <fileset refid="system_repo"/>
+            <filterchain refid="std_tokens"/>
+            <filterchain refid="procode_tags"/>
+        </copy>
+        <phingcall target="CreateArchives">
+            <property name="freeOrPro" value="${freeOrPro}" override="true"/>
+            <property name="ffop" value="${ffop}" override="true"/>
+            <property name="thisbuild" value="${thisbuild}" override="true"/>
+        </phingcall>
+
+        <!-- Remove the leftover buildDir -->
+        <delete dir="${buildDir}"/>
+
+        <!-- ================================  -->
+        <!-- Third, build the component file,  -->
+        <!-- after we reset some properties.   -->
+        <!-- ================================  -->
+        <property name="extension" value="com_${name}" override="true"/>
+        <property name="thisbuild" value="${gitTag}-${extension}" override="true"/>
+        <property name="buildDir" value="./${devBuildsDir}/${thisbuild}" override="true"/>
+
+        <echo msg="Copying GIT Repo to ${buildDir} from ${repo2} for ${freeOrPro}..."/>
+        <copy todir="${buildDir}">
+            <fileset refid="component_repo"/>
             <filterchain refid="std_tokens"/>
             <filterchain refid="procode_tags"/>
         </copy>

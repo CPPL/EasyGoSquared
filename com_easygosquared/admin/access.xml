@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_easygosquared">
+	<section name="component">
+		<action name="core.admin" title="COM_EASYGOSQUARED_ACL_ADMINISTER_EASYGOSQUARED"
+			description="COM_EASYGOSQUARED_ACL_ALLOW_USERS_I_DESC" />
+	</section>
+</access>

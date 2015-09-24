@@ -76,6 +76,16 @@
     <!--                   FILTERS                     -->
     <!-- ============================================  -->
     <!-- The standard tokens to be replaced -->
+    <filterchain id="free_std_tokens">
+        <replacetokens begintoken="##" endtoken="##">
+            <token key="VER" value="${gitTag}"/>
+            <token key="COMHASH" value="${gitHash}"/>
+            <token key="CREATEDATE" value="${packageDate}"/>
+            <token key="CURYEAR" value="${currentYear}"/>
+            <token key="FoP" value=""/>
+        </replacetokens>
+    </filterchain>
+    <!-- The standard tokens to be replaced -->
     <filterchain id="std_tokens">
         <replacetokens begintoken="##" endtoken="##">
             <token key="VER" value="${gitTag}"/>
@@ -136,7 +146,7 @@
         <echo msg="Copying GIT Repo to ${buildDir} from ${repo} for ${freeOrPro}..."/>
         <copy todir="${buildDir}">
             <fileset refid="content_repo"/>
-            <filterchain refid="std_tokens"/>
+            <filterchain refid="free_std_tokens"/>
             <filterchain refid="procode_block"/>
         </copy>
         <phingcall target="CreateArchives">

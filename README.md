@@ -5,7 +5,7 @@ A simple Joomla plugin that adds the GoSquared analytics scripts to your pages a
 ##Basic Usage Steps
   1. Install via the standard Joomla extension manager and enable it.
   2. Enable the plugin.
-  3. Add the GoSquared Identifier for the website. 
+  3. Add the GoSquared Token for the website. 
   4. _There is no step 4…_
   
 ##Options

@@ -60,7 +60,9 @@ gs_js;
         if (!$user->guest && is_array($properties) && count($properties)) {
             /**@PROBLOCK_START@**/
             $j3 = version_compare( JVERSION, '3.0', '<' ) != 1;
-            if ($j3) {
+            $isFrontEnd = !JFactory::getApplication()->isAdmin();
+
+            if ($j3 && $isFrontEnd) {
                 $userProfile = JUserHelper::getProfile($user->id);
                 $profile = $userProfile->profile;
             }

@@ -64,7 +64,7 @@ gs_js;
 
             if ($j3 && $isFrontEnd) {
                 $userProfile = JUserHelper::getProfile($user->id);
-                $profile = $userProfile->profile;
+                $profile = isset($userProfile->profile) ? $userProfile->profile : array();
             }
             /**@PROBLOCK_END@**/
 

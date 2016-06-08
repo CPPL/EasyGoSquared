@@ -84,37 +84,16 @@ class EasyGoSquaredViewControlPanel extends JViewLegacy
 
         // Views
         // Instantiate a new JLayoutFile instance
-        $layout = new JLayoutFile('joomla.toolbar.link');
+        $layout = new JLayoutFile('joomla.toolbar.standard');
 
         // Now
-        $title = JText::_('COM_EASYGOSQUARED_VIEW_NOW');
-        $displayData = array(
-            'text' => $title,'class' => '',
-            'doTask' => 'index.php?option=com_easygosquared&start_view=now'
-        );
-
-        $dhtml = $layout->render($displayData);
-        $toolbar->appendButton('Custom', $dhtml);
+        $this->addBtnToToolbar('now', JText::_('COM_EASYGOSQUARED_VIEW_NOW'), $toolbar, $layout);
 
         // Trends
-        $title = JText::_('COM_EASYGOSQUARED_VIEW_TRENDS');
-        $displayData = array(
-            'text' => $title,'class' => '',
-            'doTask' => 'index.php?option=com_easygosquared&start_view=trends'
-        );
-
-        $dhtml = $layout->render($displayData);
-        $toolbar->appendButton('Custom', $dhtml);
+        $this->addBtnToToolbar('trends', JText::_('COM_EASYGOSQUARED_VIEW_TRENDS'), $toolbar, $layout);
 
         // Ecommerce
-        $title = JText::_('COM_EASYGOSQUARED_VIEW_ECOM');
-        $displayData = array(
-            'text' => $title,'class' => '',
-            'doTask' => 'index.php?option=com_easygosquared&start_view=ecommerce'
-        );
-
-        $dhtml = $layout->render($displayData);
-        $toolbar->appendButton('Custom', $dhtml);
+        $this->addBtnToToolbar('ecommerce', JText::_('COM_EASYGOSQUARED_VIEW_ECOM'), $toolbar, $layout);
 
         // Can we do?
         $canDo = JHelperContent::getActions('com_easygosquared', '', 0);
@@ -156,12 +135,12 @@ class EasyGoSquaredViewControlPanel extends JViewLegacy
     private function _createContent()
     {
         if ($this->api_key && $this->token) {
-            $srcURL = 'https://www.gosquared.com/labs/_embed/?api_key='
-                . $this->api_key . '&site_token='
-                . $this->token . '&dashboard='
-                . $this->start_view;
+            $api_key = $this->api_key;
+            $token = $this->token;
+            $start_view = $this->start_view;
+            $srcURL = $this->getGSURL($api_key, $token, $start_view);
             $content = <<<content
-<iframe src="$srcURL"
+<iframe src="$srcURL" id="gsFrame"
         style="height:100em;width:100%" height="100%
         width="100%" height="100%"></iframe>
 content;
@@ -173,5 +152,57 @@ content;
         }
 
         return $content;
+    }
+
+    /**
+     * @param $api_key
+     * @param $token
+     * @param $start_view
+     * @return string
+     */
+    private function getGSURL($api_key, $token, $start_view)
+    {
+        $srcURL = 'https://www.gosquared.com/labs/_embed/?api_key='
+            . $api_key . '&site_token='
+            . $token . '&dashboard='
+            . $start_view;
+        return $srcURL;
+    }
+
+    /**
+     * @param $gsURL
+     * @return string
+     */
+    private function buldOnClickJS($gsURL)
+    {
+        $onClickJS = <<<ocjs
+jQuery('#gsFrame').attr('src', '$gsURL');
+ocjs;
+        return $onClickJS;
+    }
+
+    /**
+     * @param $view
+     * @param $title
+     * @return array
+     */
+    private function buildBtnData($view, $title)
+    {
+        $gsURL = $this->getGSURL($this->api_key, $this->token, $view);
+        $onClickJS = $this->buldOnClickJS($gsURL);
+
+        $displayData = array(
+            'text' => $title, 'class' => '', 'btnClass' => 'btn btn-small',
+            'doTask' => $onClickJS
+        );
+        return $displayData;
+    }
+
+    private function addBtnToToolbar($view, $title, $toolbar, $layout)
+    {
+        $displayData = $this->buildBtnData($view, $title);
+        $dhtml = $layout->render($displayData);
+        $toolbar->appendButton('Custom', $dhtml);
+
     }
 }
